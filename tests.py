@@ -25,7 +25,7 @@ class TestBooksCollector:
     # чтобы тесты были независимыми в каждом из них создавай отдельный экземпляр класса BooksCollector()
     
     
-    def test_add_new_book_title_less_forty_characters_true(self):
+    def test_add_new_book_title_more_forty_characters_false(self):
         new_book = BooksCollector() 
         long_name = 'a' * 41
         new_book.add_new_book(long_name)
