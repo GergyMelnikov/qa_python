@@ -85,3 +85,8 @@ class TestBooksCollector:
         expected_books = ['Кошмары аиста марабу', 'Пять бутылок водки']
 
         assert received_books == expected_books
+
+    
+    def get_books_genre(self):
+        library = BooksCollector()
+        books_list = ['', '']
