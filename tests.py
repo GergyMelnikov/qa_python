@@ -26,23 +26,45 @@ class TestBooksCollector:
     
     
     def test_add_new_book_title_less_then_forty_characters_true(self):
-        new_book = BooksCollector() 
+        library = BooksCollector() 
         long_name = 'a' * 41
         normal_name = 'a' * 40
-        new_book.add_new_book(long_name)
-        new_book.add_new_book(normal_name)
+        library.add_new_book(long_name)
+        library.add_new_book(normal_name)
 
-        assert long_name not in new_book.books_genre and normal_name in new_book.books_genre
+        assert long_name not in library.books_genre and normal_name in library.books_genre
 
-    @pytest.mark.parametrize('some_book, genre', [['Некоторая книга', 'Фантастика'],['Шина','Ужасы'],['Доктор гаджет','Детективы'],['Шестиструнный самурай', 'Мультфильмы'],['Токсичный мститель', 'Комедии']])
-    def test_set_book_genre_true(self, some_book, genre):
-        new_book = BooksCollector()
-        #some_book = 'Некоторая книга'
-        #genre = 'Фантастика'
-        new_book.add_new_book(some_book)
-        new_book.set_book_genre(some_book, genre)
+    @pytest.mark.parametrize('book_name, genre', 
+                             [
+        ['Некоторая книга', 'Фантастика'],
+        ['Шина','Ужасы'],
+        ['Доктор гаджет','Детективы'],
+        ['Шестиструнный самурай', 'Мультфильмы'],
+        ['Токсичный мститель', 'Комедии']
+        ])
+    def test_set_book_genre_true(self, book_name, genre):
+        library = BooksCollector()
+        library.add_new_book(book_name)
+        library.set_book_genre(book_name, genre)
 
-        assert new_book.books_genre.get(some_book) == genre
+        assert library.books_genre.get(book_name) == genre
+
+    @pytest.mark.parametrize('book_name, genre', 
+                             [
+        ['Некоторая книга', 'Фантастика'],
+        ['Шина','Ужасы'],
+        ['Инспектор гаджет','Детективы'],
+        ['Шестиструнный самурай', 'Мультфильмы'],
+        ['Токсичный мститель', 'Комедии']
+        ])
+    def test_get_book_genre_true(self, book_name, genre):
+        library = BooksCollector()
+        library.add_new_book(book_name)
+        library.set_book_genre(book_name, genre)
+        book_to_get = library.get_book_genre(book_name)
+
+        assert book_to_get == genre
 
         
+
 
