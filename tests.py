@@ -34,14 +34,15 @@ class TestBooksCollector:
 
         assert long_name not in library.books_genre and normal_name in library.books_genre
 
+
     @pytest.mark.parametrize('book_name, genre', 
                              [
-        ['Некоторая книга', 'Фантастика'],
-        ['Шина','Ужасы'],
-        ['Доктор гаджет','Детективы'],
-        ['Шестиструнный самурай', 'Мультфильмы'],
-        ['Токсичный мститель', 'Комедии']
-        ])
+                                ['Некоторая книга', 'Фантастика'],
+                                ['Шина','Ужасы'],
+                                ['Доктор гаджет','Детективы'],
+                                ['Шестиструнный самурай', 'Мультфильмы'],
+                                ['Токсичный мститель', 'Комедии']
+                             ])
     def test_set_book_genre_true(self, book_name, genre):
         library = BooksCollector()
         library.add_new_book(book_name)
@@ -49,22 +50,38 @@ class TestBooksCollector:
 
         assert library.books_genre.get(book_name) == genre
 
+
     @pytest.mark.parametrize('book_name, genre', 
                              [
-        ['Некоторая книга', 'Фантастика'],
-        ['Шина','Ужасы'],
-        ['Инспектор гаджет','Детективы'],
-        ['Шестиструнный самурай', 'Мультфильмы'],
-        ['Токсичный мститель', 'Комедии']
-        ])
+                                ['Некоторая книга', 'Фантастика'],
+                                ['Шина','Ужасы'],
+                                ['Инспектор гаджет','Детективы'],
+                                ['Шестиструнный самурай', 'Мультфильмы'],
+                                ['Токсичный мститель', 'Комедии']
+                             ])
     def test_get_book_genre_true(self, book_name, genre):
         library = BooksCollector()
         library.add_new_book(book_name)
         library.set_book_genre(book_name, genre)
+        
         book_to_get = library.get_book_genre(book_name)
 
         assert book_to_get == genre
 
+
+    def test_get_books_with_specific_genre_true(self):
+        library = BooksCollector()
+        books_list = [
+            ['Кошмары аиста марабу', 'Детективы'],
+            ['Пять бутылок водки', 'Детективы'],
+            ['Компьютерные сети В.Олифер', 'Ужасы'],
+            ['Как создать свой CD Д.Мартин', 'Фантастика']
+            ]
+        for book_name, genre in books_list:
+            library.add_new_book(book_name)
+            library.set_book_genre(book_name, genre)
         
+        received_books = library.get_books_with_specific_genre('Детективы')
+        expected_books = ['Кошмары аиста марабу', 'Пять бутылок водки']
 
-
+        assert received_books == expected_books
