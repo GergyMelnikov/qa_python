@@ -110,6 +110,7 @@ class TestBooksCollector:
             ['Где? Сколько?', 'Детективы'],
             ['Коты трюкачи', 'Фантастика'],
             ['А книги про котов быают?', 'Мультфильмы'],
+            ['11111','Комедии'],
             ['Как мультфильм попал в книгу', '']
         ]
         
@@ -117,7 +118,7 @@ class TestBooksCollector:
             library.add_new_book(book_name)
             library.set_book_genre(book_name, genre)
 
-        expected_books = ['Коты трюкачи', 'А книги про котов быают?']
+        expected_books = ['Коты трюкачи', 'А книги про котов быают?','11111']
         received_books = library.get_books_for_children()
 
         assert expected_books == received_books
